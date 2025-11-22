@@ -41,10 +41,15 @@ class Database
         $stmt->execute($params);
         return $stmt->fetchAll();
     }
-
+    //insert, delete
     public function execute(string $sql, array $params = []): int{
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute($params);
         return $stmt->rowCount();
+    }
+
+    public function lastInsertId(): string
+    {
+        return $this->pdo->lastInsertId();
     }
 }
