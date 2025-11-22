@@ -3,6 +3,7 @@
 namespace Khanev\UrlShortener;
 use PDO;
 use PDOException;
+use PDOStatement;
 
 class Database
 {
@@ -32,5 +33,18 @@ class Database
     public function getConnection(): PDO
     {
         return $this->pdo;
+    }
+
+    //select
+    public function query(string $sql, array $params = []): array{
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute($params);
+        return $stmt->fetchAll();
+    }
+
+    public function execute(string $sql, array $params = []): int{
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute($params);
+        return $stmt->rowCount();
     }
 }
