@@ -4,7 +4,6 @@ namespace Khanev\UrlShortener;
 class UrlShortener
 {
 
-
     private Database $db;
     private ShortCodeGenerator $generator;
 
@@ -35,7 +34,6 @@ class UrlShortener
 
         return $result[0]['url'];
     }
-
 
     public function incrementAccessCount(string $shortCode) :void{
         $this->db->execute("update short_urls set access_count = access_count + 1 where short_code = ?", [$shortCode]);

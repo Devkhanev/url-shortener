@@ -41,7 +41,7 @@ class Database
         $stmt->execute($params);
         return $stmt->fetchAll();
     }
-    //insert, delete
+    //insert, delete, update
     public function execute(string $sql, array $params = []): int{
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute($params);
