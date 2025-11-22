@@ -32,6 +32,9 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: secret
       MYSQL_DATABASE: url_shortener
+      TZ: Europe/Moscow
+      command: --default-time-zone='+03:00'
+
     volumes:
       - db_data:/var/lib/mysql
 

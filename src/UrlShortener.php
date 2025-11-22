@@ -25,6 +25,18 @@ class UrlShortener
         ];
     }
 
+    public function getAllData(int $id){
+        $data = $this->db->query("select * from short_urls where id= ?", [$id]);
+        return $data[0];
+    }
+
+    public  function getDataByShortCode(string $shortCode) :?array{
+        $data = $this->db->query("select *from short_urls where short_code = ?", [$shortCode]);
+        if(empty($data)){return null;}
+        else return $data[0];
+    }
+
+
     public function getUrl(string $shortCode): ?string{
         $result = $this->db->query("select url from short_urls where short_code = ?", [$shortCode]);
 
@@ -34,6 +46,23 @@ class UrlShortener
 
         return $result[0]['url'];
     }
+
+    public function updateUrl(string $shortCode, string $newUrl):?array{
+        $data = $this->db->query("select *from short_urls where short_code = ?", [$shortCode]);
+        if(empty($data)){return null;}
+        $this->db->execute("update short_urls set url = ? where short_code = ?", [$newUrl, $shortCode]);
+        return $this->getDataByShortCode($shortCode);
+
+    }
+
+
+    public function deleteUrl(string $shortCode): bool{
+        $data = $this->db->query("select *from short_urls where short_code = ?", [$shortCode]);
+        if(empty($data)){return false;}
+        $this->db->execute("delete from short_urls where short_code = ?", [$shortCode]);
+        return true;
+    }
+
 
     public function incrementAccessCount(string $shortCode) :void{
         $this->db->execute("update short_urls set access_count = access_count + 1 where short_code = ?", [$shortCode]);
