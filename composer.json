@@ -1,0 +1,16 @@
+{
+    "name": "khanev/url-shortener",
+    "description": "URL Shortening Service API",
+    "autoload": {
+        "psr-4": {
+            "Khanev\\UrlShortener\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Devkhanev",
+            "email": "khanev.git@gmail.com"
+        }
+    ],
+    "require": {}
+}
